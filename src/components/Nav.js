@@ -6,7 +6,7 @@ const Nav = ({ setQuery }) => {
 
   const handleNavLinkClick = (tag) => {
     setQuery(tag); 
-    navigate(`/${tag}`); 
+    navigate(`search/${tag}`); 
   };
 
   return (

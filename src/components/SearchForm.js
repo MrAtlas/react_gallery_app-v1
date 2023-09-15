@@ -10,7 +10,7 @@ const SearchForm = (props) => {
         e.preventDefault();
         const searchValue = searchText.current.value;
         props.changeQuery(searchValue);
-        let path = `/${searchValue}`;
+        let path = `search/${searchValue}`;
         navigate(path);
         e.currentTarget.reset(); 
     }

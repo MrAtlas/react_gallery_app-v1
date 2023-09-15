@@ -32,7 +32,7 @@ function App() {
     setLoading(true);
     let activeFetch = true;
     axios.get(
-      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=3368ae0136038088cf7357f906dd96b1&tags=${query}&per_page=24&format=json&nojsoncallback=1`
+      `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
     ).then(response => {
       if(activeFetch){
         setPics(response.data.photos.photo)
@@ -54,8 +54,9 @@ function App() {
       <SearchForm changeQuery={handleChangeQuery}/>
       <Nav setQuery={setQuery}/>
       <Routes>
-        <Route path="/" element={<Navigate to="/cats" />} /> {/* Default route to /cats */}
-        <Route path="/:topic" element={<Photo data={pics} />} /> {/* Route for dynamic topics */}
+        <Route path="/" element={<Navigate to="/cats" />} /> 
+        <Route path="search/:topic" element={<Photo data={pics} />} />
+        <Route path="*" element={<NotFound  />} />  
       </Routes>
       
     </div>
