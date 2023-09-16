@@ -29,7 +29,7 @@ function App() {
   const [cats, setCats] = useState([]);
   const [computers, setComputers] = useState([]);
 
-  const { topic = 'cats' } = useParams();
+  const {topic} = useParams();
   const navigate = useNavigate();
 
 
@@ -46,24 +46,24 @@ function App() {
           setCats(response.data.photos.photo);
         } else if (query === "computers") {
           setComputers(response.data.photos.photo);
-        }else{
+        } else {
           setPics(response.data.photos.photo)
         }
         setLoading(false);
       }
     })
-    .catch(error => {
-      console.log("This is the error: ", error);
-    });
+      .catch(error => {
+        console.log("This is the error: ", error);
+      });
 
     return () => { activeFetch = false; }
   };
-  
-  const changeQuery = (searchText) => {
-    fetchData(searchText);
-    navigate(`/search/${searchText}`);
+
+  const changeQuery = (topic) => {
+    fetchData(topic);
+    navigate(`/search/${topic}`);
   };
-  
+
 
   useEffect(() => {
     fetchData(topic);
@@ -71,15 +71,15 @@ function App() {
 
   return (
     <div className="App">
-      <SearchForm  changeQuery={changeQuery}/>
-      <Nav  setQuery={topic}/>
+      <SearchForm changeQuery={changeQuery} />
+      <Nav changeQuery={changeQuery} />
       <Routes>
-        <Route path="/" element={<Navigate to="search/cats" />} /> 
-        <Route path="search/dogs" element={<Photo data={dogs} />} />
-        <Route path="search/cats" element={<Photo data={cats} />} />
-        <Route path="search/computers" element={<Photo data={computers} />} />
-        <Route path="search/:topic" element={<Photo data={pics} />} />
-        <Route path="*" element={<NotFound />} />  
+        <Route path="/" element={<Navigate to="search/cats" />} />
+        <Route path="search/:topic" element={<Photo loading={loading} data={pics}  />} />
+        <Route path="search/dogs" element={<Photo loading={loading} data={dogs} />} />
+        <Route path="search/cats" element={<Photo loading={loading} data={cats} />} />
+        <Route path="search/computers" element={<Photo loading={loading} data={computers} />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );
