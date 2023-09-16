@@ -1,4 +1,4 @@
-import { useEffect, useState, useParams, useNavigate } from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 //components
@@ -11,7 +11,7 @@ import Photo from "./components/Photo";
 import apiKey from "./components/Config";
 
 //Router
-import {Route, Routes, Navigate} from 'react-router-dom'
+import { Route, Routes, Navigate, useParams, useNavigate } from 'react-router-dom'
 
 
 /**
@@ -24,41 +24,63 @@ import {Route, Routes, Navigate} from 'react-router-dom'
 function App() {
 
   const [pics, setPics] = useState([]);
-  const [query, setQuery] = useState('cats');
   const [loading, setLoading] = useState(true);
+  const [dogs, setDogs] = useState([]);
+  const [cats, setCats] = useState([]);
+  const [computers, setComputers] = useState([]);
+
+  const { topic = 'cats' } = useParams();
+  const navigate = useNavigate();
 
 
-  useEffect(() => {
+  const fetchData = (query) => {
     setLoading(true);
     let activeFetch = true;
     axios.get(
       `https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=${apiKey}&tags=${query}&per_page=24&format=json&nojsoncallback=1`
     ).then(response => {
-      if(activeFetch){
-        setPics(response.data.photos.photo)
-        setLoading(false)
+      if (activeFetch) {
+        if (query === "dogs") {
+          setDogs(response.data.photos.photo);
+        } else if (query === "cats") {
+          setCats(response.data.photos.photo);
+        } else if (query === "computers") {
+          setComputers(response.data.photos.photo);
+        }else{
+          setPics(response.data.photos.photo)
+        }
+        setLoading(false);
       }
     })
     .catch(error => {
-      console.log("This is the error: ", error)
-    })
-    return () => {activeFetch = false}
-  }, [query]);
+      console.log("This is the error: ", error);
+    });
 
-  const handleChangeQuery = (searchValue) => {
-    setQuery(searchValue);
-  }
+    return () => { activeFetch = false; }
+  };
+  
+  const changeQuery = (searchText) => {
+    fetchData(searchText);
+    navigate(`/search/${searchText}`);
+  };
+  
+
+  useEffect(() => {
+    fetchData(topic);
+  }, [topic]);
 
   return (
     <div className="App">
-      <SearchForm changeQuery={handleChangeQuery}/>
-      <Nav setQuery={setQuery}/>
+      <SearchForm  changeQuery={changeQuery}/>
+      <Nav  setQuery={topic}/>
       <Routes>
-        <Route path="/" element={<Navigate to="/cats" />} /> 
+        <Route path="/" element={<Navigate to="search/cats" />} /> 
+        <Route path="search/dogs" element={<Photo data={dogs} />} />
+        <Route path="search/cats" element={<Photo data={cats} />} />
+        <Route path="search/computers" element={<Photo data={computers} />} />
         <Route path="search/:topic" element={<Photo data={pics} />} />
-        <Route path="*" element={<NotFound  />} />  
+        <Route path="*" element={<NotFound />} />  
       </Routes>
-      
     </div>
   );
 }

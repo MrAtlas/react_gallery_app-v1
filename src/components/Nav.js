@@ -1,29 +1,30 @@
 import React from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 
-const Nav = ({ setQuery }) => {
+const Nav = ({ changeQuery }) => {
+
   let navigate = useNavigate();
 
   const handleNavLinkClick = (tag) => {
-    setQuery(tag); 
-    navigate(`search/${tag}`); 
+    changeQuery(tag); 
+    //navigate(`search/${tag}`); 
   };
 
   return (
     <nav className="main-nav">
       <ul>
         <li>
-          <NavLink to="cats" onClick={() => handleNavLinkClick('cats')}>
+          <NavLink to="search/cats" onClick={() => handleNavLinkClick('cats')}>
             Cats
           </NavLink>
         </li>
         <li>
-          <NavLink to="dogs" onClick={() => handleNavLinkClick('dogs')}>
+          <NavLink to="search/dogs" onClick={() => handleNavLinkClick('dogs')}>
             Dogs
           </NavLink>
         </li>
         <li>
-          <NavLink to="computers" onClick={() => handleNavLinkClick('computers')}>
+          <NavLink to="search/computers" onClick={() => handleNavLinkClick('computers')}>
             Computers
           </NavLink>
         </li>
