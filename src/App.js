@@ -32,7 +32,6 @@ function App() {
   const {topic} = useParams();
   const navigate = useNavigate();
 
-
   const fetchData = (query) => {
     setLoading(true);
     let activeFetch = true;
@@ -67,6 +66,7 @@ function App() {
 
   useEffect(() => {
     fetchData(topic);
+    console.log(topic)
   }, [topic]);
 
   return (
