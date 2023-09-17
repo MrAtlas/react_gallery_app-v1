@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import NotFound from './NotFound';
 import { useParams } from 'react-router';
 
-const Photo = ({ data, loading }) => {
+const Photo = ({ data, loading, query, changeQuery }) => {
 
   const { topic } = useParams();
   let pics;
@@ -18,9 +18,15 @@ const Photo = ({ data, loading }) => {
     pics = <NotFound />
   }
 
+  useEffect(() => {
+    if (topic && topic !== query) {
+      changeQuery(topic);
+    }
+  }, [topic, query, changeQuery]);
+
   return (
     <div className="photo-container">
-      <h2>{topic}</h2>
+      <h2>{topic ? topic : query}</h2>
       <ul>
         {pics}
       </ul>

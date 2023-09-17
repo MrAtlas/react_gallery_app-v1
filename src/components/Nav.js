@@ -12,17 +12,17 @@ const Nav = ({ changeQuery }) => {
     <nav className="main-nav">
       <ul>
         <li>
-          <NavLink to="/search/cats" onClick={() => handleNavLinkClick('cats')}>
+          <NavLink to="/cats" onClick={() => handleNavLinkClick('cats')}>
             Cats
           </NavLink>
         </li>
         <li>
-          <NavLink to="/search/dogs" onClick={() => handleNavLinkClick('dogs')}>
+          <NavLink to="/dogs" onClick={() => handleNavLinkClick('dogs')}>
             Dogs
           </NavLink>
         </li>
         <li>
-          <NavLink to="/search/computers" onClick={() => handleNavLinkClick('computers')}>
+          <NavLink to="/computers" onClick={() => handleNavLinkClick('computers')}>
             Computers
           </NavLink>
         </li>

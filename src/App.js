@@ -28,6 +28,7 @@ function App() {
   const [dogs, setDogs] = useState([]);
   const [cats, setCats] = useState([]);
   const [computers, setComputers] = useState([]);
+  const [query, setQuery] = useState('cats');
 
   const {topic} = useParams();
   const navigate = useNavigate();
@@ -58,16 +59,15 @@ function App() {
     return () => { activeFetch = false; }
   };
 
-  const changeQuery = (topic) => {
-    fetchData(topic);
-    navigate(`/search/${topic}`);
+  const changeQuery = (newQuery) => {
+    setQuery(newQuery);
+    navigate(`/search/${newQuery}`);
   };
 
 
   useEffect(() => {
-    fetchData(topic);
-    console.log(topic)
-  }, [topic]);
+    fetchData(query);
+  }, [query]);
 
   return (
     <div className="App">
@@ -75,10 +75,10 @@ function App() {
       <Nav changeQuery={changeQuery} />
       <Routes>
         <Route path="/" element={<Navigate to="search/cats" />} />
-        <Route path="search/:topic" element={<Photo loading={loading} data={pics}  />} />
-        <Route path="search/dogs" element={<Photo loading={loading} data={dogs} />} />
-        <Route path="search/cats" element={<Photo loading={loading} data={cats} />} />
-        <Route path="search/computers" element={<Photo loading={loading} data={computers} />} />
+        <Route path="search/:topic" element={<Photo loading={loading} data={pics} query={query} changeQuery={changeQuery}/>} />
+        <Route path="/dogs" element={<Photo loading={loading} data={dogs} query={query} changeQuery={changeQuery}/>} />
+        <Route path="/cats" element={<Photo loading={loading} data={cats} query={query} changeQuery={changeQuery}/>} />
+        <Route path="/computers" element={<Photo loading={loading} data={computers} query={query} changeQuery={changeQuery}/>} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
