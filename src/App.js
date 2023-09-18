@@ -73,13 +73,14 @@ function App() {
       <SearchForm changeQuery={changeQuery} />
       <Nav changeQuery={changeQuery} />
       <Routes>
-        <Route path="/" element={<Navigate to="/cats" />} />
-        <Route path="search/:topic" element={<Photo loading={loading} data={pics} query={query} changeQuery={changeQuery}/>} />
-        <Route path="/dogs" element={<Photo loading={loading} data={dogs} query={query} changeQuery={changeQuery}/>} />
-        <Route path="/cats" element={<Photo loading={loading} data={cats} query={query} changeQuery={changeQuery}/>} />
-        <Route path="/computers" element={<Photo loading={loading} data={computers} query={query} changeQuery={changeQuery}/>} />
+        <Route path="/" element={<Navigate to="/cats" replace />} />
+        <Route path="/search/:topic" element={<Photo loading={loading} data={pics} query={query} changeQuery={changeQuery} />} />
+        <Route path="/dogs" element={<Photo loading={loading} data={dogs} query={query} changeQuery={changeQuery} />} />
+        <Route path="/cats" element={<Photo loading={loading} data={cats} query={query} changeQuery={changeQuery} />} />
+        <Route path="/computers" element={<Photo loading={loading} data={computers} query={query} changeQuery={changeQuery} />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
+
     </div>
   );
 }

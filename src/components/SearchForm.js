@@ -1,13 +1,24 @@
 import React, { useRef } from 'react'
+import { useNavigate } from 'react-router';
 
 const SearchForm = ({ changeQuery }) => {
+
+  const navigate = useNavigate();
 
   const searchText = useRef(null);
 
   const handleSubmit = e => {
     e.preventDefault();
     const searchValue = searchText.current.value;
-    changeQuery(searchValue);
+    if(searchValue === 'cats'){
+      navigate('/cats');
+    }else if(searchValue === 'dogs'){
+      navigate('/cats');
+    }else if(searchValue === 'computers'){
+      navigate('/computers');
+    }else{
+      changeQuery(searchValue);
+    }
     e.currentTarget.reset();
   }
 
