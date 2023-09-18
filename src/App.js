@@ -5,6 +5,9 @@ import axios from 'axios';
 import Nav from './components/Nav';
 import SearchForm from './components/SearchForm'
 import Photo from "./components/Photo";
+import Cats from './components/Cats';
+import Dogs from './components/Dogs';
+import Computers from './components/Computers';
 
 //Api Key
 import apiKey from "./components/Config";
@@ -14,12 +17,6 @@ import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
 import PageNotFound from './components/PageNotFound';
 
 
-/**
- * flickr api 
- * https://www.flickr.com/services/rest/?method=flickr.photos.search&api_key=3368ae0136038088cf7357f906dd96b1&tags=sunsets&per_page=24&format=json&nojsoncallback=1
- * 
- *`https://farm${photo.farm}.staticflickr.com/${photo.server}/${photo.id}_${photo.secret}_n.jpg`
- */
 
 function App() {
 
@@ -74,10 +71,10 @@ function App() {
       <Nav changeQuery={changeQuery} />
       <Routes>
         <Route path="/" element={<Navigate to="/cats" replace />} />
+        <Route path="/dogs" element={<Dogs data={dogs} loading={loading}/>} />
+        <Route path="/cats" element={<Cats data={cats} loading={loading}/>} />
+        <Route path="/computers" element={<Computers data={computers} loading={loading}/>} />
         <Route path="/search/:topic" element={<Photo loading={loading} data={pics} query={query} changeQuery={changeQuery} />} />
-        <Route path="/dogs" element={<Photo loading={loading} data={dogs} query={query} changeQuery={changeQuery} />} />
-        <Route path="/cats" element={<Photo loading={loading} data={cats} query={query} changeQuery={changeQuery} />} />
-        <Route path="/computers" element={<Photo loading={loading} data={computers} query={query} changeQuery={changeQuery} />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
 
