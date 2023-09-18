@@ -11,7 +11,7 @@ import Photo from "./components/Photo";
 import apiKey from "./components/Config";
 
 //Router
-import { Route, Routes, Navigate, useParams, useNavigate } from 'react-router-dom'
+import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
 
 
 /**
@@ -30,7 +30,6 @@ function App() {
   const [computers, setComputers] = useState([]);
   const [query, setQuery] = useState('cats');
 
-  const {topic} = useParams();
   const navigate = useNavigate();
 
   const fetchData = (query) => {
@@ -74,7 +73,7 @@ function App() {
       <SearchForm changeQuery={changeQuery} />
       <Nav changeQuery={changeQuery} />
       <Routes>
-        <Route path="/" element={<Navigate to="search/cats" />} />
+        <Route path="/" element={<Navigate to="/cats" />} />
         <Route path="search/:topic" element={<Photo loading={loading} data={pics} query={query} changeQuery={changeQuery}/>} />
         <Route path="/dogs" element={<Photo loading={loading} data={dogs} query={query} changeQuery={changeQuery}/>} />
         <Route path="/cats" element={<Photo loading={loading} data={cats} query={query} changeQuery={changeQuery}/>} />

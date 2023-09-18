@@ -150,3 +150,6 @@ dist
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+#Config withapi keys
+/src/components/Config.js
