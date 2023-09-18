@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import axios from 'axios';
 
 //components
-import NotFound from './components/NotFound';
 import Nav from './components/Nav';
 import SearchForm from './components/SearchForm'
 import Photo from "./components/Photo";
@@ -12,6 +11,7 @@ import apiKey from "./components/Config";
 
 //Router
 import { Route, Routes, Navigate, useNavigate } from 'react-router-dom'
+import PageNotFound from './components/PageNotFound';
 
 
 /**
@@ -78,7 +78,7 @@ function App() {
         <Route path="/dogs" element={<Photo loading={loading} data={dogs} query={query} changeQuery={changeQuery} />} />
         <Route path="/cats" element={<Photo loading={loading} data={cats} query={query} changeQuery={changeQuery} />} />
         <Route path="/computers" element={<Photo loading={loading} data={computers} query={query} changeQuery={changeQuery} />} />
-        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<PageNotFound />} />
       </Routes>
 
     </div>
