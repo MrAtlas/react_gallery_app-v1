@@ -57,7 +57,6 @@ function App() {
 
   const changeQuery = (newQuery) => {
     setQuery(newQuery);
-    navigate(`/search/${newQuery}`);
   };
 
 

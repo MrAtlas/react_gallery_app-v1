@@ -18,6 +18,7 @@ const SearchForm = ({ changeQuery }) => {
       navigate('/computers');
     }else{
       changeQuery(searchValue);
+      navigate(`/search/${searchValue}`);
     }
     e.currentTarget.reset();
   }

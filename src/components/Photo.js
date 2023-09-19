@@ -19,10 +19,10 @@ const Photo = ({ data, loading, query, changeQuery }) => {
   }
 
   useEffect(() => {
-    if (topic && topic !== query) {
+    if (topic) {
       changeQuery(topic);
     }
-  }, [topic, query, changeQuery]);
+  }, [topic]);
 
   return (
     <div className="photo-container">
